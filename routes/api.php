@@ -1,18 +1,16 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Domain\Users\ApiControllers\BrowseUsersController;
+use App\Domain\Users\ApiControllers\CreateUsersController;
+use App\Domain\Users\ApiControllers\DeleteUsersController;
+use App\Domain\Users\ApiControllers\ReadUsersController;
+use App\Domain\Users\ApiControllers\UpdateUsersController;
+use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => '/users', 'as' => 'api.users.'], static function () {
+    Route::get('/', BrowseUsersController::class)->name('browse');
+    Route::post('/', CreateUsersController::class)->name('store');
+    Route::get('/{user}', ReadUsersController::class)->name('read');
+    Route::put('/{user}', UpdateUsersController::class)->name('update');
+    Route::delete('/{user}', DeleteUsersController::class)->name('destroy');
 });

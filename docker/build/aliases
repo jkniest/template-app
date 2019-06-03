@@ -1,0 +1,22 @@
+# Composer
+alias c="composer"
+alias cr="composer require"
+alias dumpload="composer dump-autoload"
+alias cinst="composer install"
+alias cu="composer update --with-dependencies"
+alias old="composer outdated -D"
+
+# Laravel
+alias art="php artisan"
+alias tinker="art tinker"
+alias migrate="art migrate:fresh --seed"
+alias models="migrate && art ide-helper:models -N"
+alias model-update="art ide-helper:models -N"
+
+# PHPUnit
+alias phpunit="./vendor/bin/phpunit"
+alias p="phpunit --order-by=random"
+alias pf="p --filter"
+
+# CS Fixer
+alias fix="make test-php-cs-fixer"

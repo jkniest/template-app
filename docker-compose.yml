@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+  redis:
+    image: registry.gitlab.com/jkniest/template-registry/redis:develop
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+    volumes:
+      - redis-data:/data
+    restart: always
+
+  postgres:
+    image: postgres:11.3
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+
+  fpm:
+    image: registry.gitlab.com/jkniest/template-registry/fpm:develop
+    build:
+      context: .
+      dockerfile: docker/fpm/Dockerfile
+    volumes:
+      - .:/srv/app:delegated
+    depends_on:
+      - redis
+      - postgres
+    restart: always
+
+  nginx:
+    image: registry.gitlab.com/jkniest/template-registry/nginx:develop
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - .:/srv/app:cached
+    ports:
+      - "${NGINX_PORT}:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.basic.frontend.rule=Host:${NGINX_URL}"
+      - "traefik.basic.port=80"
+      - "traefik.basic.protocol=http"
+    depends_on:
+      - fpm
+    networks:
+      - default
+      - proxy
+    restart: always
+
+  cron:
+    image: registry.gitlab.com/jkniest/template-registry/cron:develop
+    build:
+      context: .
+      dockerfile: docker/cron/Dockerfile
+    volumes:
+      - .:/srv/app:cached
+    depends_on:
+      - fpm
+    restart: always
+
+  postgres_testing:
+    image: postgres:11.3
+    environment:
+      POSTGRES_DB: 'testing'
+      POSTGRES_USER: 'testing'
+      POSTGRES_PASSWORD: 'secret'
+    restart: always
+
+  build:
+    image: registry.gitlab.com/jkniest/template-registry/build:develop
+    build:
+      context: .
+      dockerfile: docker/build/Dockerfile
+    environment:
+      COMPOSER_HOME: '/root/.composer'
+    volumes:
+      - .:/srv/app:delegated
+    depends_on:
+      - redis
+      - postgres
+
+  mailcatcher:
+    image: 'schickling/mailcatcher'
+    ports:
+      - '${MAILCATCHER_PORT}:1080'
+    restart: 'always'
+
+volumes:
+  redis-data: ~
+  postgres-data: ~
+  traefik-data: ~
+
+networks:
+  proxy:
+    external: ${PROXY_NETWORK_EXTERNAL}

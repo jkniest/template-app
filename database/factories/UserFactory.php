@@ -15,3 +15,9 @@ $factory->define(User::class, static function (Faker $faker) {
         'remember_token'    => Str::random(10),
     ];
 });
+
+$factory->state(User::class, 'admin', static function() {
+    return [
+        'is_admin' => true
+    ];
+});

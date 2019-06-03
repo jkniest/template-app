@@ -2,9 +2,18 @@
 
 namespace Tests;
 
+use App\Domain\Users\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication;
+    use CreatesApplication, RefreshDatabase;
+
+    protected function signIn(?User $user = null): User
+    {
+        return tap($user ?? factory(User::class)->state('admin')->create(), static function (User $user) {
+            $this->be($user);
+        });
+    }
 }
