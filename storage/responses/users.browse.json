@@ -1,0 +1,26 @@
+{
+    "data": [{
+        "uuid": "8b258ea2-6c16-4d13-9f54-560032996afe",
+        "name": "Jim Burbon",
+        "email": "admin@example.com"
+    }, {
+        "uuid": "b7b6d876-4f6b-4398-8fa1-5b711d77eb0f",
+        "name": "Mr. Urban Balistreri",
+        "email": "user@example.com"
+    }],
+    "links": {
+        "first": "http:\/\/localhost\/api\/users?page=1",
+        "last": "http:\/\/localhost\/api\/users?page=7",
+        "prev": null,
+        "next": "http:\/\/localhost\/api\/users?page=2"
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 7,
+        "path": "http:\/\/localhost\/api\/users",
+        "per_page": 15,
+        "to": 15,
+        "total": 102
+    }
+}

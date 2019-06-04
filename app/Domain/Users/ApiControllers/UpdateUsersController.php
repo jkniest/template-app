@@ -10,6 +10,16 @@ use Illuminate\Http\JsonResponse;
 
 class UpdateUsersController
 {
+    /**
+     * Update a user
+     *
+     * @group Users
+     * @queryParam user required The uuid of the user which should be updated
+     * @bodyParam name string The name of the new user
+     * @bodyParam email string The e-mail address of the new user
+     * @authenticated
+     * @responseFile responses/users.update.json
+     */
     public function __invoke(User $user, UpdateUserRequest $request, UpdateUserAction $action): JsonResponse
     {
         $action->execute($user, $request);

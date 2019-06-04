@@ -1,0 +1,8 @@
+{
+    "message": "User successfully created.",
+    "data": {
+        "uuid": "8b258ea2-6c16-4d13-9f54-560032996afe",
+        "name": "Jim Burbon",
+        "email": "admin@example.com"
+    }
+}
