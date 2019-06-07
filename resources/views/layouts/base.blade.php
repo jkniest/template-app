@@ -18,9 +18,9 @@
         <div id="app">
             @yield('body')
 
-{{--            @if(flash()->message)--}}
-{{--                <flash-notification message="{{flash()->message}}" type="{{flash()->class}}"/>--}}
-{{--            @endif--}}
+            @if(flash()->message)
+                <flash-notification message="{{flash()->message}}" type="{{flash()->class}}"/>
+            @endif
         </div>
 
         <script src="{{mix('js/manifest.js')}}"></script>

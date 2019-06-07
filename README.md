@@ -1,6 +1,6 @@
 # Laravel app template
 
-// circleci badge
+[![CircleCI](https://circleci.com/gh/jkniest/template-app.svg?style=svg)](https://circleci.com/gh/jkniest/template-app)
 
 ## Installation
 1. Clone the project: `git clone git@github.com:jkniest/template-app.git`
@@ -14,6 +14,7 @@
 - [laravel-queueable-action](https://github.com/spatie/laravel-queueable-action)
 - [laravel-apidoc-generator](https://github.com/mpociot/laravel-apidoc-generator)
 - [laravel-backup](https://github.com/spatie/laravel-backup)
+- [laravel-flash](https://github.com/spatie/laravel-flash)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response

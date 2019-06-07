@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import ExampleComponent from './components/ExampleComponent';
+import FlashNotification from './components/FlashNotification';
 
 new Vue({
-    components: { ExampleComponent }
+    components: { FlashNotification }
 }).$mount('#app');
 
 // import Echo from 'laravel-echo'
