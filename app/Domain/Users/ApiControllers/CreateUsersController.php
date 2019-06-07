@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Users\ApiControllers;
 
+use Illuminate\Http\JsonResponse;
+use App\Domain\Users\Resources\UserResource;
 use App\Domain\Users\Actions\CreateUserAction;
 use App\Domain\Users\Requests\CreateUserRequest;
-use App\Domain\Users\Resources\UserResource;
-use Illuminate\Http\JsonResponse;
 
 class CreateUsersController
 {
     /**
-     * Create a new user
+     * Create a new user.
      *
      * @group Users
      * @bodyParam name string required The name of the new user

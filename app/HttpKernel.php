@@ -1,28 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-use App\Middleware\Authenticate;
-use App\Middleware\CheckForMaintenanceMode;
-use App\Middleware\EncryptCookies;
-use App\Middleware\RedirectIfAuthenticated;
 use App\Middleware\TrimStrings;
+use App\Middleware\Authenticate;
 use App\Middleware\TrustProxies;
+use App\Middleware\EncryptCookies;
 use App\Middleware\VerifyCsrfToken;
-use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
-use Illuminate\Auth\Middleware\Authorize;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel;
-use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Auth\Middleware\Authorize;
+use App\Middleware\CheckForMaintenanceMode;
+use App\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Middleware\SetCacheHeaders;
-use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
+use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
+use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 
 class HttpKernel extends Kernel
 {

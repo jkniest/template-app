@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Users\ApiControllers;
 
 use App\Domain\Users\Models\User;
+use Spatie\QueryBuilder\QueryBuilder;
 use App\Domain\Users\Resources\UserResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class BrowseUsersController
 {
     /**
-     * Browse all existing users
+     * Browse all existing users.
      *
      * @group Users
      * @queryParam page The page which should be shown

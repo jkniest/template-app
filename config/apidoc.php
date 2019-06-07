@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -8,28 +10,18 @@ return [
      */
     'output'  => 'public/docs',
 
-    /*
-     * The router to be used (Laravel or Dingo).
-     */
+    // The router to be used (Laravel or Dingo).
     'router'  => 'laravel',
 
-    /*
-     * Generate a Postman collection in addition to HTML docs.
-     */
+    // Generate a Postman collection in addition to HTML docs.
     'postman' => [
-        /*
-         * Specify whether the Postman collection should be generated.
-         */
+        // Specify whether the Postman collection should be generated.
         'enabled'     => false,
 
-        /*
-         * The name for the exported Postman collection. Default: config('app.name')." API"
-         */
+        // The name for the exported Postman collection. Default: config('app.name')." API"
         'name'        => null,
 
-        /*
-         * The description for the exported Postman collection.
-         */
+        // The description for the exported Postman collection.
         'description' => null,
     ],
 
@@ -46,17 +38,13 @@ return [
              */
             'match'   => [
 
-                /*
-                 * Match only routes whose domains match this pattern (use * as a wildcard to match any characters).
-                 */
+                // Match only routes whose domains match this pattern (use * as a wildcard to match any characters).
                 'domains'  => [
                     '*',
                     // 'domain1.*',
                 ],
 
-                /*
-                 * Match only routes whose paths match this pattern (use * as a wildcard to match any characters).
-                 */
+                // Match only routes whose paths match this pattern (use * as a wildcard to match any characters).
                 'prefixes' => [
                     'api/*',
                     // 'users/*',
@@ -89,13 +77,9 @@ return [
                 // 'users.create', 'admin.*'
             ],
 
-            /*
-             * Specify rules to be applied to all the routes in this group when generating documentation
-             */
+            // Specify rules to be applied to all the routes in this group when generating documentation
             'apply'   => [
-                /*
-                 * Specify headers to be added to the example requests
-                 */
+                // Specify headers to be added to the example requests
                 'headers'        => [
                     'Authorization' => 'Bearer {token}',
                     // 'Api-Version' => 'v2',
@@ -139,32 +123,24 @@ return [
                         // 'service.key' => 'value',
                     ],
 
-                    /*
-                     * Headers which should be sent with the API call.
-                     */
+                    // Headers which should be sent with the API call.
                     'headers'  => [
                         'Content-Type' => 'application/json',
                         'Accept'       => 'application/json',
                         // 'key' => 'value',
                     ],
 
-                    /*
-                     * Cookies which should be sent with the API call.
-                     */
+                    // Cookies which should be sent with the API call.
                     'cookies'  => [
                         // 'name' => 'value'
                     ],
 
-                    /*
-                     * Query parameters which should be sent with the API call.
-                     */
+                    // Query parameters which should be sent with the API call.
                     'query'    => [
                         // 'key' => 'value',
                     ],
 
-                    /*
-                     * Body parameters which should be sent with the API call.
-                     */
+                    // Body parameters which should be sent with the API call.
                     'body'     => [
                         // 'key' => 'value',
                     ],

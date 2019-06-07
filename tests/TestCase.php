@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use App\Domain\Users\Models\User;
@@ -12,7 +14,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function signIn(?User $user = null): User
     {
-        return tap($user ?? factory(User::class)->state('admin')->create(), static function (User $user) {
+        return tap($user ?? factory(User::class)->state('admin')->create(), static function (User $user): void {
             $this->be($user);
         });
     }

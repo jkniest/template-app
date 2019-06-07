@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel;
+use Illuminate\Console\Scheduling\Schedule;
 
 class ConsoleKernel extends Kernel
 {
@@ -16,7 +18,7 @@ class ConsoleKernel extends Kernel
 
     protected function commands(): void
     {
-        collect(Modules::ALL)->each(function (string $module) {
+        collect(Modules::ALL)->each(function (string $module): void {
             $this->load(app_path("Application/{$module}/Commands"));
         });
     }

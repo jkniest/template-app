@@ -1,0 +1,159 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: docker:dind
+    working_directory: ~/app
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: apk update
+      - run: apk add bash py-pip
+      - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
+      - checkout
+      - run: chmod +x ./docker/build.sh
+      - run: ./docker/build.sh
+  prepare:php:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-registry/build:develop
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - vendor
+      - run: make build-composer
+      - run: mkdir -p /tmp/workspace
+      - run: cp -r vendor /tmp/workspace/vendor
+      - save_cache:
+          key: vendor
+          paths:
+            - "vendor"
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - vendor
+  prepare:node:
+    docker:
+      - image: node:8.15
+    working_directory: ~/app
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node
+      - run: yarn install
+      - run: yarn run production
+      - run: mkdir -p /tmp/workspace
+      - run: cp -r public /tmp/workspace/public
+      - run: cp -r node_modules /tmp/workspace/node_modules
+      - save_cache:
+          key: node
+          paths:
+            - "node_modules"
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - public
+            - node_modules
+  test:phpunit:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-registry/build:develop
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+      - image: postgres:11.3-alpine
+        environment:
+          POSTGRES_DB: testing
+          POSTGRES_USER: testing
+          POSTGRES_PASSWORD: secret
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/vendor vendor
+      - run: rm -rf public && cp -r /tmp/workspace/public public
+      - run: cp .env.ci .env
+      - run: rm .env.testing
+      - run: make test-phpunit
+  test:prettier:
+    docker:
+      - image: node:8.15
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/node_modules node_modules
+      - run: ./node_modules/.bin/prettier --check "resources/**/*.scss"
+  test:php-cs-fixer:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-registry/build:develop
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/vendor vendor
+      - run: cp .env.ci .env
+      - run: make test-php-cs-fixer
+  test:eslinter:
+    docker:
+      - image: node:8.15
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/node_modules node_modules
+      - run: ./node_modules/.bin/eslint 'resources/js/**/*' --ext .js,.vue
+  test:larastan:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-registry/build:develop
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+    working_directory: ~/app
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /tmp/workspace
+      - run: cp -r /tmp/workspace/vendor vendor
+      - run: cp .env.ci .env
+      - run: make test-larastan
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
+      - prepare:php:
+          requires:
+            - build
+      - prepare:node:
+          requires:
+            - build
+      - test:phpunit:
+          requires:
+            - prepare:php
+            - prepare:node
+      - test:prettier:
+          requires:
+            - prepare:node
+      - test:php-cs-fixer:
+          requires:
+            - prepare:php
+      - test:eslinter:
+          requires:
+            - prepare:node
+      - test:larastan:
+          requires:
+            - prepare:php

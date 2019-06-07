@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Users\ApiControllers;
 
-use App\Domain\Users\Actions\UpdateUserAction;
 use App\Domain\Users\Models\User;
-use App\Domain\Users\Requests\UpdateUserRequest;
-use App\Domain\Users\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
+use App\Domain\Users\Resources\UserResource;
+use App\Domain\Users\Actions\UpdateUserAction;
+use App\Domain\Users\Requests\UpdateUserRequest;
 
 class UpdateUsersController
 {
     /**
-     * Update a user
+     * Update a user.
      *
      * @group Users
      * @queryParam user required The uuid of the user which should be updated

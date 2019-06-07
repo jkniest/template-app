@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
 
     /*
@@ -45,22 +47,22 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root'   => storage_path('app'),
         ],
 
         'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'driver'     => 'local',
+            'root'       => storage_path('app/public'),
+            'url'        => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
 
         's3' => [
-            'driver' => 's3',
-            'key' => env('DO_SPACES_PUBLIC_KEY'),
-            'secret' => env('DO_SPACES_SECRET_KEY'),
-            'region' => env('DO_SPACES_REGION'),
-            'bucket' => env('DO_SPACES_NAME'),
+            'driver'   => 's3',
+            'key'      => env('DO_SPACES_PUBLIC_KEY'),
+            'secret'   => env('DO_SPACES_SECRET_KEY'),
+            'region'   => env('DO_SPACES_REGION'),
+            'bucket'   => env('DO_SPACES_NAME'),
             'endpoint' => env('DO_SPACES_ENDPOINT'),
         ],
 

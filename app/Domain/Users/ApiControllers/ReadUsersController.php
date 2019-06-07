@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Domain\Users\ApiControllers;
 
 use App\Domain\Users\Models\User;
-use App\Domain\Users\Resources\UserResource;
 use Spatie\QueryBuilder\QueryBuilder;
+use App\Domain\Users\Resources\UserResource;
 
 class ReadUsersController
 {
     /**
-     * Read a specific user
+     * Read a specific user.
      *
      * @group Users
      * @queryParam user required The uuid of the user

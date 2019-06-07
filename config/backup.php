@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use Spatie\Backup\Notifications\Notifiable;
+use Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy;
 use Spatie\Backup\Notifications\Notifications\BackupHasFailed;
-use Spatie\Backup\Notifications\Notifications\BackupWasSuccessful;
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
 use Spatie\Backup\Notifications\Notifications\CleanupHasFailed;
+use Spatie\Backup\Notifications\Notifications\BackupWasSuccessful;
 use Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful;
 use Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound;
 use Spatie\Backup\Notifications\Notifications\UnhealthyBackupWasFound;
-use Spatie\Backup\Tasks\Cleanup\Strategies\DefaultStrategy;
-use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
 use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
 
 return [
@@ -68,9 +70,7 @@ return [
         'slack' => [
             'webhook_url' => env('BACKUP_ALERT_SLACK_WEBHOOK'),
 
-            /*
-             * If this is set to null the default channel of the webhook will be used.
-             */
+            // If this is set to null the default channel of the webhook will be used.
             'channel'     => null,
 
             'username' => null,
