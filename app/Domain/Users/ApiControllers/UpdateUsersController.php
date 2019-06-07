@@ -6,8 +6,8 @@ namespace App\Domain\Users\ApiControllers;
 
 use App\Domain\Users\Models\User;
 use Illuminate\Http\JsonResponse;
+use App\Domain\Users\Actions\UpdateUser;
 use App\Domain\Users\Resources\UserResource;
-use App\Domain\Users\Actions\UpdateUserAction;
 use App\Domain\Users\Requests\UpdateUserRequest;
 
 class UpdateUsersController
@@ -22,7 +22,7 @@ class UpdateUsersController
      * @authenticated
      * @responseFile responses/users.update.json
      */
-    public function __invoke(User $user, UpdateUserRequest $request, UpdateUserAction $action): JsonResponse
+    public function __invoke(User $user, UpdateUserRequest $request, UpdateUser $action): JsonResponse
     {
         $action->execute($user, $request);
 

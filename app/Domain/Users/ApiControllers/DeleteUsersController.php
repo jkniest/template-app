@@ -6,7 +6,7 @@ namespace App\Domain\Users\ApiControllers;
 
 use App\Domain\Users\Models\User;
 use Illuminate\Http\JsonResponse;
-use App\Domain\Users\Actions\DeleteUserAction;
+use App\Domain\Users\Actions\DeleteUser;
 use App\Domain\Users\Requests\DeleteUserRequest;
 
 class DeleteUsersController
@@ -19,7 +19,7 @@ class DeleteUsersController
      * @authenticated
      * @responseFile responses/users.delete.json
      */
-    public function __invoke(User $user, DeleteUserRequest $request, DeleteUserAction $action): JsonResponse
+    public function __invoke(User $user, DeleteUserRequest $request, DeleteUser $action): JsonResponse
     {
         $action->execute($user);
 

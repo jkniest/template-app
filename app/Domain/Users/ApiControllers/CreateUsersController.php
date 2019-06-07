@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Users\ApiControllers;
 
 use Illuminate\Http\JsonResponse;
+use App\Domain\Users\Actions\CreateUser;
 use App\Domain\Users\Resources\UserResource;
-use App\Domain\Users\Actions\CreateUserAction;
 use App\Domain\Users\Requests\CreateUserRequest;
 
 class CreateUsersController
@@ -21,7 +21,7 @@ class CreateUsersController
      * @authenticated
      * @responseFile responses/users.store.json
      */
-    public function __invoke(CreateUserRequest $request, CreateUserAction $action): JsonResponse
+    public function __invoke(CreateUserRequest $request, CreateUser $action): JsonResponse
     {
         $user = $action->execute($request);
 

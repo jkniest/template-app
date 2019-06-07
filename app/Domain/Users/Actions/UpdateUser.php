@@ -7,7 +7,7 @@ namespace App\Domain\Users\Actions;
 use Illuminate\Http\Request;
 use App\Domain\Users\Models\User;
 
-class UpdateUserAction
+class UpdateUser
 {
     public function execute(User $user, Request $request): void
     {

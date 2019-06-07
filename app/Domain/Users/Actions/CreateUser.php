@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Domain\Users\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class CreateUserAction
+class CreateUser
 {
     public function execute(Request $request): User
     {
