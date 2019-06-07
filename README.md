@@ -12,6 +12,8 @@
 ## Included packages
 - [laravel-query-builder](https://github.com/spatie/laravel-query-builder)
 - [laravel-queueable-action](https://github.com/spatie/laravel-queueable-action)
+- [laravel-apidoc-generator](https://github.com/mpociot/laravel-apidoc-generator)
+- [laravel-backup](https://github.com/spatie/laravel-backup)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response

@@ -1,4 +1,5 @@
 FROM node:8.15 as nodejs
+FROM postgres:11.3 as postgres
 FROM php:7.3-cli
 LABEL maintainer="Jordan Kniest <mail@jkniest.de>"
 
@@ -11,6 +12,8 @@ RUN ln -s /opt/yarn-v1.*/bin/yarn /usr/local/bin/yarn \
  && ln -s /opt/yarn-v1.*/bin/yarnpkg /usr/local/bin/yarnpkg \
  && ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
  && ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
+
+COPY --from=postgres /usr/lib/postgresql/11/bin/pg_dump /usr/local/bin/pg_dump
 
 RUN apt update && \
 	apt install git zip libzip-dev zlib1g-dev libpq-dev -y

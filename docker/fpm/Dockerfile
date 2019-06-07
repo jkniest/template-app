@@ -1,5 +1,8 @@
 FROM php:7.3-fpm
+FROM postgres:11.3 as postgres
 LABEL maintainer="Jordan Kniest <mail@jkniest.de>"
+
+COPY --from=postgres /usr/lib/postgresql/11/bin/pg_dump /usr/local/bin/pg_dump
 
 RUN apt update && \
 	apt install git zip libzip-dev zlib1g-dev libpq-dev locales -y
