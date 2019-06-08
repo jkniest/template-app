@@ -1,5 +1,5 @@
-FROM php:7.3-fpm
 FROM postgres:11.3 as postgres
+FROM php:7.3-fpm
 LABEL maintainer="Jordan Kniest <mail@jkniest.de>"
 
 COPY --from=postgres /usr/lib/postgresql/11/bin/pg_dump /usr/local/bin/pg_dump
