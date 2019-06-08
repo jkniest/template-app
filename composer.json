@@ -25,6 +25,7 @@
         "mpociot/laravel-apidoc-generator": "^3.8",
         "nunomaduro/larastan": "^0.3.17",
         "predis/predis": "^1.1",
+        "sentry/sentry-laravel": "^1.0",
         "spatie/laravel-backup": "^6.2",
         "spatie/laravel-flash": "^1.2",
         "spatie/laravel-query-builder": "^1.17",

@@ -11,6 +11,8 @@
         "eslint": "eslint 'resources/js/**/*' --ext .js,.vue --fix"
     },
     "devDependencies": {
+        "@sentry/browser": "^5.4.0",
+        "@sentry/integrations": "^5.4.1",
         "axios": "^0.19",
         "cross-env": "^5.1",
         "eslint": "^5.16.0",
