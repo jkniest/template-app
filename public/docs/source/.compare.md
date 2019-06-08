@@ -21,7 +21,7 @@ Welcome to the generated API reference.
 
 #Users
 <!-- START_fc1e4f6a697e3c48257de845299b71d5 -->
-## Browse all existing users
+## Browse all existing users.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -102,7 +102,7 @@ Parameter | Status | Description
 <!-- END_fc1e4f6a697e3c48257de845299b71d5 -->
 
 <!-- START_12e37982cc5398c7100e59625ebb5514 -->
-## Create a new user
+## Create a new user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -165,7 +165,7 @@ Parameter | Type | Status | Description
 <!-- END_12e37982cc5398c7100e59625ebb5514 -->
 
 <!-- START_8653614346cb0e3d444d164579a0a0a2 -->
-## Read a specific user
+## Read a specific user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
@@ -219,14 +219,14 @@ Parameter | Status | Description
 
 <!-- END_8653614346cb0e3d444d164579a0a0a2 -->
 
-<!-- START_78e59f373e92a1bb338f7d17b183ae6a -->
-## Update a user
+<!-- START_3a56a3fa621ace409678c31e5eff35f8 -->
+## Update a user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
-curl -X PUT "http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375" \
+curl -X PATCH "http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375" \
     -H "Authorization: Bearer {token}" \
     -H "Content-Type: application/json" \
     -d '{"name":"consequatur","email":"consequatur"}'
@@ -252,7 +252,7 @@ let body = {
 }
 
 fetch(url, {
-    method: "PUT",
+    method: "PATCH",
     headers: headers,
     body: body
 })
@@ -274,7 +274,7 @@ fetch(url, {
 ```
 
 ### HTTP Request
-`PUT api/users/{user}`
+`PATCH api/users/{user}`
 
 #### Body Parameters
 
@@ -288,10 +288,10 @@ Parameter | Status | Description
 --------- | ------- | ------- | -----------
     user |  required  | The uuid of the user which should be updated
 
-<!-- END_78e59f373e92a1bb338f7d17b183ae6a -->
+<!-- END_3a56a3fa621ace409678c31e5eff35f8 -->
 
 <!-- START_d2db7a9fe3abd141d5adbc367a88e969 -->
-## Delete a specific user
+## Delete a specific user.
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:

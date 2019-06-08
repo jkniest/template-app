@@ -29,8 +29,6 @@ trait HasUuid
 
     /**
      * Get the value indicating whether the IDs are incrementing.
-     *
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIncrementing(): bool
     {

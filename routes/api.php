@@ -11,6 +11,6 @@ Route::group(['prefix' => '/users', 'as' => 'api.users.'], static function () {
     Route::get('/', BrowseUsersController::class)->name('browse');
     Route::post('/', CreateUsersController::class)->name('store');
     Route::get('/{user}', ReadUsersController::class)->name('read');
-    Route::put('/{user}', UpdateUsersController::class)->name('update');
+    Route::patch('/{user}', UpdateUsersController::class)->name('update');
     Route::delete('/{user}', DeleteUsersController::class)->name('destroy');
 });

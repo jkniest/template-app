@@ -25,7 +25,6 @@ class CreateUsersTest extends CreateApiTestCase
             'users',
             User::class,
             $this->validData(),
-            $message,
             [$field => $value]
         );
     }

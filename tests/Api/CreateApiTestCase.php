@@ -24,7 +24,7 @@ class CreateApiTestCase extends TestCase
         $this->assertSame($class::first()->uuid, $data['uuid']);
     }
 
-    public function createWithValidation(string $resourceName, string $class, array $valid, string $message, array $changes): void
+    public function createWithValidation(string $resourceName, string $class, array $valid, array $changes): void
     {
         $response = $this->postJson(route("api.{$resourceName}.store"), array_merge($valid, $changes));
         $response->assertJsonValidationErrors(array_keys($changes));
