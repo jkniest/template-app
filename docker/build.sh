@@ -24,4 +24,5 @@ build redis ${PROJECT_DIR}/docker/redis/Dockerfile
 build fpm ${PROJECT_DIR}/docker/fpm/Dockerfile
 build nginx ${PROJECT_DIR}/docker/nginx/Dockerfile
 build cron ${PROJECT_DIR}/docker/cron/Dockerfile
+build horizon ${PROJECT_DIR}/docker/horizon/Dockerfile
 build build ${PROJECT_DIR}/docker/build/Dockerfile

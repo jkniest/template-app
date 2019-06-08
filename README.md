@@ -16,6 +16,7 @@
 - [laravel-backup](https://github.com/spatie/laravel-backup)
 - [laravel-flash](https://github.com/spatie/laravel-flash)
 - [laravel-web-tinker](https://github.com/spatie/laravel-web-tinker)
+- [horizon](https://github.com/laravel/horizon)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response

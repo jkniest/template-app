@@ -65,6 +65,17 @@ services:
       - fpm
     restart: always
 
+  horizon:
+    image: registry.gitlab.com/jkniest/template-registry/horizon:develop
+    build:
+      context: .
+      dockerfile: docker/horizon/Dockerfile
+    volumes:
+      - .:/srv/app:cached
+    depends_on:
+      - fpm
+    restart: always
+
   postgres_testing:
     image: postgres:11.3
     environment:
