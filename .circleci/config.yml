@@ -105,7 +105,7 @@ jobs:
           at: /tmp/workspace
       - run: cp -r /tmp/workspace/vendor vendor
       - run: cp .env.ci .env
-      - run: make test-php-cs-fixer
+      - run: ./vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run app/ tests/ config/
   test:eslinter:
     docker:
       - image: node:8.15

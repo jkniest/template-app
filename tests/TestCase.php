@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Laravel\Passport\Passport;
 use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Laravel\Passport\Passport;
 
 abstract class TestCase extends BaseTestCase
 {

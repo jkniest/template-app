@@ -5,14 +5,19 @@ declare(strict_types=1);
 namespace App\Domain\Users\Requests;
 
 use App\Domain\Users\Models\User;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::user()->can('create', User::class);
+        $user = Auth::user();
+        if (!$user) {
+            return false;
+        }
+
+        return $user->can('create', User::class);
     }
 
     public function rules(): array

@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Users\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::user()->can('update', $this->user);
+        $user = Auth::user();
+        if (!$user) {
+            return false;
+        }
+
+        return $user->can('update', $this->user);
     }
 
     public function rules(): array

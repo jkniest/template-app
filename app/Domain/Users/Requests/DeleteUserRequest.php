@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace App\Domain\Users\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteUserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::user()->can('delete', $this->user);
+        $user = Auth::user();
+        if (!$user) {
+            return false;
+        }
+
+        return $user->can('delete', $this->user);
     }
 
     public function rules(): array
