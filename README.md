@@ -22,6 +22,7 @@
 - [passport](https://github.com/laravel/passport)
 - [scout](https://github.com/laravel/scout)
 - [scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver)
+- [phpunit-pretty-print](https://github.com/sempro/phpunit-pretty-print)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response

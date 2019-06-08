@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45c0e6270b0388d6eb572b91d354bd51",
+    "content-hash": "91ca0cd6ad41a39b23e1cb8ac97f12ab",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -9175,6 +9175,37 @@
                 "diff"
             ],
             "time": "2018-02-15T16:58:55+00:00"
+        },
+        {
+            "name": "sempro/phpunit-pretty-print",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sempro/phpunit-pretty-print.git",
+                "reference": "415d2a22d173c376ffb01db57f5c88c07c3f8dea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sempro/phpunit-pretty-print/zipball/415d2a22d173c376ffb01db57f5c88c07c3f8dea",
+                "reference": "415d2a22d173c376ffb01db57f5c88c07c3f8dea",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0",
+                "phpunit/phpunit": ">=7.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sempro\\PHPUnitPrettyPrinter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Prettify PHPUnit output",
+            "time": "2018-09-03T07:04:02+00:00"
         },
         {
             "name": "spatie/laravel-web-tinker",
