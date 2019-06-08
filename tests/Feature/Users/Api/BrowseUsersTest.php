@@ -31,6 +31,18 @@ class BrowseUsersTest extends BrowseApiTestCase
     }
 
     /** @test */
+    public function it_can_search(): void
+    {
+        $this->signInApi();
+
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
+
+        $this->browseWithSearch('users', [$user1, $user3], [$user2]);
+    }
+
+    /** @test */
     public function it_requires_an_authenticated_user(): void
     {
         $this->browseUnauthenticated('users');

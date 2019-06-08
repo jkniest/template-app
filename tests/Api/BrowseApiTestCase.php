@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Tests\Api;
 
 use Tests\TestCase;
+use Laravel\Scout\Builder;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Database\Eloquent\Collection;
 
 abstract class BrowseApiTestCase extends TestCase
 {
@@ -43,6 +45,27 @@ abstract class BrowseApiTestCase extends TestCase
         })->toArray();
 
         $response = $this->getJson(route("api.{$resourceName}.browse", $filters));
+        $response->assertOk();
+
+        foreach ($expected as $item) {
+            $this->assertStringContainsString($item->uuid, $response->content());
+        }
+
+        foreach ($unexpected as $item) {
+            $this->assertStringNotContainsString($item->uuid, $response->content());
+        }
+    }
+
+    protected function browseWithSearch(string $resourceName, array $expected, array $unexpected): void
+    {
+        $builder = $this->prophesize(Builder::class);
+        $this->app->bind(Builder::class, static function () use ($builder) {
+            return $builder->reveal();
+        });
+        $builder->get()->willReturn(new Collection($expected));
+
+        $response = $this->getJson(route("api.{$resourceName}.browse", ['search' => 'Something']));
+        $response->assertOk();
 
         foreach ($expected as $item) {
             $this->assertStringContainsString($item->uuid, $response->content());

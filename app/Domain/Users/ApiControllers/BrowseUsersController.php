@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Users\ApiControllers;
 
+use Illuminate\Http\Request;
 use App\Domain\Users\Models\User;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Domain\Users\Resources\UserResource;
@@ -21,12 +22,20 @@ class BrowseUsersController
      * @authenticated
      * @responseFile responses/users.browse.json
      */
-    public function __invoke(): AnonymousResourceCollection
+    public function __invoke(Request $request): AnonymousResourceCollection
     {
-        $query = QueryBuilder::for(User::class)
-            ->allowedFilters(['name'])
-            ->paginate();
+        $results = null;
+        if ($request->has('search')) {
+            $results = User::search($request->get('search'))->get()->pluck('uuid');
+        }
 
-        return UserResource::collection($query);
+        $query = QueryBuilder::for(User::class)
+            ->allowedFilters(['name']);
+
+        if ($results) {
+            $query->whereIn('uuid', $results);
+        }
+
+        return UserResource::collection($query->paginate());
     }
 }
