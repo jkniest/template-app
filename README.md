@@ -20,6 +20,8 @@
 - [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper)
 - [telescope](https://github.com/laravel/telescope)
 - [passport](https://github.com/laravel/passport)
+- [scout](https://github.com/laravel/scout)
+- [scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response
