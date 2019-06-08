@@ -17,4 +17,20 @@ class DeleteApiTestCase extends TestCase
         $this->assertNull($model->fresh());
         $response->assertJsonStructure(['message']);
     }
+
+    public function destroyUnauthenticated(Model $model, string $resourceName): void
+    {
+        $this->deleteJson(route("api.{$resourceName}.destroy", $model->getKey()))
+            ->assertStatus(401);
+
+        $this->assertNotNull($model->fresh());
+    }
+
+    public function destroyUnauthorized(Model $model, string $resourceName): void
+    {
+        $this->deleteJson(route("api.{$resourceName}.destroy", $model->getKey()))
+            ->assertStatus(403);
+
+        $this->assertNotNull($model->fresh());
+    }
 }

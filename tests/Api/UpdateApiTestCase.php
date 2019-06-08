@@ -39,4 +39,16 @@ abstract class UpdateApiTestCase extends TestCase
 
         $response->assertJsonStructure(['message', 'errors']);
     }
+
+    protected function updateUnauthenticated(string $resourceName, Model $model, array $validData): void
+    {
+        $this->patchJson(route("api.{$resourceName}.update", $model->getKey()), $validData)
+            ->assertStatus(401);
+    }
+
+    protected function updateUnauthorized(string $resourceName, Model $model, array $validData): void
+    {
+        $this->patchJson(route("api.{$resourceName}.update", $model->getKey()), $validData)
+            ->assertStatus(403);
+    }
 }

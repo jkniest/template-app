@@ -13,6 +13,8 @@ class BrowseUsersTest extends BrowseApiTestCase
     public function it_can_browse_all_users(): void
     {
         $users = factory(User::class, 20)->create();
+        $this->signInApi($users[0]);
+
         $this->browse('users', $users);
     }
 
@@ -23,6 +25,14 @@ class BrowseUsersTest extends BrowseApiTestCase
         $user2 = factory(User::class)->create(['name' => 'Member 2']);
         $user3 = factory(User::class)->create(['name' => 'User three!']);
 
+        $this->signInApi($user1);
+
         $this->browseWithFilter('users', [$user1, $user3], [$user2], ['name' => 'user']);
+    }
+
+    /** @test */
+    public function it_requires_an_authenticated_user(): void
+    {
+        $this->browseUnauthenticated('users');
     }
 }

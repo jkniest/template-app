@@ -80,6 +80,7 @@ jobs:
       - run: rm -rf public && cp -r /tmp/workspace/public public
       - run: cp .env.ci .env
       - run: rm .env.testing
+      - run: php artisan passport:keys
       - run: make test-phpunit
   test:prettier:
     docker:

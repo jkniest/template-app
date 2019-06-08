@@ -12,6 +12,7 @@ class CreateUsersTest extends CreateApiTestCase
     /** @test */
     public function it_can_create_a_new_user(): void
     {
+        $this->signInApi();
         $this->create('users', User::class, $this->validData());
     }
 
@@ -21,12 +22,27 @@ class CreateUsersTest extends CreateApiTestCase
      */
     public function it_validates_the_input(string $message, string $field, string $value): void
     {
+        $this->signInApi();
         $this->createWithValidation(
             'users',
             User::class,
             $this->validData(),
             [$field => $value]
         );
+    }
+
+    /** @test */
+    public function it_requires_an_authenticated_user(): void
+    {
+        $this->createUnauthenticated('users', User::class, $this->validData());
+    }
+
+    /** @test */
+    public function it_requires_an_administrator(): void
+    {
+        $this->signInApi(factory(User::class)->create()->refresh());
+
+        $this->createUnauthorized('users', User::class, $this->validData());
     }
 
     public function inputProvider(): array

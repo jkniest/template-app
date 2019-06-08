@@ -43,7 +43,6 @@ abstract class BrowseApiTestCase extends TestCase
         })->toArray();
 
         $response = $this->getJson(route("api.{$resourceName}.browse", $filters));
-        $data = $response->json('data');
 
         foreach ($expected as $item) {
             $this->assertStringContainsString($item->uuid, $response->content());
@@ -52,5 +51,10 @@ abstract class BrowseApiTestCase extends TestCase
         foreach ($unexpected as $item) {
             $this->assertStringNotContainsString($item->uuid, $response->content());
         }
+    }
+
+    protected function browseUnauthenticated(string $resourceName): void
+    {
+        $this->getJson(route("api.{$resourceName}.browse"))->assertStatus(401);
     }
 }

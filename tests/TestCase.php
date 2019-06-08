@@ -7,6 +7,7 @@ namespace Tests;
 use App\Domain\Users\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Laravel\Passport\Passport;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -16,6 +17,13 @@ abstract class TestCase extends BaseTestCase
     {
         return tap($user ?? factory(User::class)->state('admin')->create(), static function (User $user): void {
             $this->be($user);
+        });
+    }
+
+    protected function signInApi(?User $user = null): User
+    {
+        return tap($user ?? factory(User::class)->state('admin')->create(), static function (User $user): void {
+            Passport::actingAs($user);
         });
     }
 }

@@ -19,6 +19,7 @@
 - [horizon](https://github.com/laravel/horizon)
 - [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper)
 - [telescope](https://github.com/laravel/telescope)
+- [passport](https://github.com/laravel/passport)
 
 ## Recommended packages
 - [laravel-responsecache](https://github.com/spatie/laravel-responsecache) if you need to cache to whole html response
