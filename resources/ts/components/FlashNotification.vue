@@ -9,18 +9,21 @@
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        message: {required: true},
-        type: {required: true}
-    },
+<script lang="ts">
+import Vue from 'vue';
+import {Component, Prop} from "vue-property-decorator";
 
-    data: () => ({
-        visible: true,
-    }),
+@Component
+export default class FlashNotification extends Vue {
+    @Prop({required: true})
+    private message!: string;
 
-    created() {
+    @Prop({required: true})
+    private type!: string;
+
+    private visible: boolean = true;
+
+    private created(): void {
         setTimeout(() => {
             this.visible = false;
         }, 5000);
