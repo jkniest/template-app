@@ -7,6 +7,7 @@
         "experimentalDecorators": true
     },
     "include": [
-        "resources/ts/**/*"
+        "resources/ts/**/*.ts",
+        "resources/ts/**/*.vue"
     ]
 }

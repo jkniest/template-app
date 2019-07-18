@@ -7,16 +7,15 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "eslint": "eslint 'resources/js/**/*' --ext .js,.vue --fix"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@fimbul/valtyr": "^0.21.0",
+        "@fimbul/ve": "^0.21.0",
+        "@fimbul/wotan": "^0.21.1",
         "@sentry/browser": "^5.4.0",
         "@sentry/integrations": "^5.4.1",
-        "axios": "^0.19",
         "cross-env": "^5.1",
-        "eslint": "^5.16.0",
-        "eslint-plugin-vue": "^5.2.2",
         "laravel-mix": "^4.0.7",
         "laravel-mix-tailwind": "^0.1.0",
         "prettier": "^1.18.2",

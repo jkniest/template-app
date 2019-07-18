@@ -46,7 +46,7 @@ build-database:
 ############
 
 ## Test application (CS fixer / PHPunit / etc.)
-test: test-php-cs-fixer test-phpunit test-larastan test-prettier test-eslint
+test: test-php-cs-fixer test-phpunit test-larastan test-prettier test-wotan
 
 ## PHP CS fixer
 test-php-cs-fixer:
@@ -65,8 +65,8 @@ test-prettier:
 	yarn prettier --write 'resources/**/*.scss'
 
 ## Eslint
-test-eslint:
-	yarn eslint 'resources/js/**/*' --ext .js,.vue --fix
+test-wotan:
+	yarn wotan --fix
 
 ############
 ### API ###

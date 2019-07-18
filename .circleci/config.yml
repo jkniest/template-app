@@ -106,7 +106,7 @@ jobs:
       - run: cp -r /tmp/workspace/vendor vendor
       - run: cp .env.ci .env
       - run: ./vendor/bin/php-cs-fixer fix --config=.php_cs --allow-risky=yes --dry-run app/ tests/ config/
-  test:eslinter:
+  test:wotan:
     docker:
       - image: node:8.15
     working_directory: ~/app
@@ -115,7 +115,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: cp -r /tmp/workspace/node_modules node_modules
-      - run: ./node_modules/.bin/eslint 'resources/js/**/*' --ext .js,.vue
+      - run: ./node_modules/.bin/wotan
   test:larastan:
     docker:
       - image: registry.gitlab.com/jkniest/template-registry/build:develop
@@ -152,7 +152,7 @@ workflows:
       - test:php-cs-fixer:
           requires:
             - prepare:php
-      - test:eslinter:
+      - test:wotan:
           requires:
             - prepare:node
       - test:larastan:

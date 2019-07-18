@@ -1,6 +1,6 @@
-import Vue from 'vue';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import Vue from 'vue';
 import FlashNotification from './components/FlashNotification';
 
 if (process.env.MIX_SENTRY_DSN) {
@@ -11,7 +11,7 @@ if (process.env.MIX_SENTRY_DSN) {
 }
 
 new Vue({
-    components: {FlashNotification}
+    components: {FlashNotification},
 }).$mount('#app');
 
 // import Echo from 'laravel-echo'
