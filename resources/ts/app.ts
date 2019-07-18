@@ -1,7 +1,9 @@
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import Inertia from 'inertia-vue';
 import Vue from 'vue';
-import FlashNotification from './components/FlashNotification';
+
+Vue.use(Inertia);
 
 if (process.env.MIX_SENTRY_DSN) {
     Sentry.init({
@@ -10,9 +12,25 @@ if (process.env.MIX_SENTRY_DSN) {
     });
 }
 
+const app = document.getElementById('app');
+if (!app) {
+    throw new Error('#app element does not exist!');
+}
+
+const page = app.dataset.page;
+
+if (!page) {
+    throw new Error('page dataset on #app does not exists!');
+}
+
 new Vue({
-    components: {FlashNotification},
-}).$mount('#app');
+    render: (h) => h(Inertia, {
+        props: {
+            initialPage: JSON.parse(page),
+            resolveComponent: (name: string) => import(`@/Pages/${name}`).then((module) => module.default),
+        },
+    }),
+}).$mount(app);
 
 // import Echo from 'laravel-echo'
 

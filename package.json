@@ -10,12 +10,14 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@fimbul/valtyr": "^0.21.0",
         "@fimbul/ve": "^0.21.0",
         "@fimbul/wotan": "^0.21.1",
         "@sentry/browser": "^5.4.0",
         "@sentry/integrations": "^5.4.1",
         "cross-env": "^5.1",
+        "inertia-vue": "^0.1.0",
         "laravel-mix": "^4.0.7",
         "laravel-mix-tailwind": "^0.1.0",
         "prettier": "^1.18.2",

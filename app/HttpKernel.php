@@ -13,6 +13,7 @@ use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Auth\Middleware\Authorize;
 use App\Middleware\CheckForMaintenanceMode;
 use App\Middleware\RedirectIfAuthenticated;
+use Inertia\Middleware as InteriaMiddleware;
 use Illuminate\Http\Middleware\SetCacheHeaders;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Routing\Middleware\ThrottleRequests;
@@ -57,6 +58,7 @@ class HttpKernel extends Kernel
             ShareErrorsFromSession::class,
             VerifyCsrfToken::class,
             SubstituteBindings::class,
+            InteriaMiddleware::class,
         ],
 
         'api' => [

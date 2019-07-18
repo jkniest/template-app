@@ -1,9 +1,8 @@
 <?php
 
+use App\Domain\Users\Controllers\ReadUsersController;
+use App\Domain\Users\Controllers\BrowseUsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'pages.welcome')->name('index');
-Route::get('/flash', static function () {
-    flash('Hello world!', 'success');
-    return redirect()->route('index');
-});
+Route::get('/', BrowseUsersController::class)->name('index');
+Route::get('/users/{user}', ReadUsersController::class)->name('read');
