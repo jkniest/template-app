@@ -1,8 +1,10 @@
 <template>
     <base-layout title="User Details">
-        <div>User <strong v-text="user.name"/></div>
-        <br><br>
-        <inertia-link href="/">Go back</inertia-link>
+        <h1 class="text-3xl mb-5">User <strong v-text="user.name"/></h1>
+        <inertia-link class="p-3 bg-blue-300 rounded hover:bg-blue-500 text-blue-900 hover:text-blue-100"
+                      :href="`/`">
+            Go back
+        </inertia-link>
     </base-layout>
 </template>
 
