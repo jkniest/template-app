@@ -3483,7 +3483,7 @@ inertia-vue@^0.1.0:
   dependencies:
     inertia inertiajs/inertia
 
-"inertia@github:inertiajs/inertia":
+inertia@inertiajs/inertia:
   version "0.1.0"
   resolved "https://codeload.github.com/inertiajs/inertia/tar.gz/a515eaee3ba716c7773b994fb9850a613cb4f1a7"
   dependencies:

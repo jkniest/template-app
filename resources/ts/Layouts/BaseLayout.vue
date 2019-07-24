@@ -1,6 +1,18 @@
 <template>
     <main>
-        <slot/>
+        <header class="bg-blue-200 h-14 text-blue-900 flex mb-8">
+            <strong class="p-4">Template application</strong>
+            <a class="ml-auto p-4 bg-blue-400 text-blue-100 hover:bg-blue-500"
+               href="https://github.com/jkniest/template-app"
+               target="_blank"
+            >
+                Find on github
+            </a>
+        </header>
+
+        <section class="px-4">
+            <slot/>
+        </section>
     </main>
 </template>
 

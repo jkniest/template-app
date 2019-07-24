@@ -24,6 +24,7 @@
 - [scout-tntsearch-driver](https://github.com/teamtnt/laravel-scout-tntsearch-driver)
 - [phpunit-pretty-print](https://github.com/sempro/phpunit-pretty-print)
 - [sentry-laravel](https://github.com/getsentry/sentry-laravel)
+- [inertia-laravel](https://github.com/inertiajs/inertia-laravel)
 
 ## Recommended packages
 - [nova](https://github.com/laravel/nova) if you need a modern admin interface
