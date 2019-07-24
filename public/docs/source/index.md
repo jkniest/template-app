@@ -30,6 +30,7 @@ Welcome to the generated API reference.
 curl -X GET -G "http://localhost/api/users" \
     -H "Authorization: Bearer {token}"
 ```
+
 ```javascript
 const url = new URL("http://localhost/api/users");
 
@@ -53,6 +54,7 @@ fetch(url, {
     .then(response => response.json())
     .then(json => console.log(json));
 ```
+
 
 > Example response (200):
 
@@ -114,6 +116,7 @@ curl -X POST "http://localhost/api/users" \
     -d '{"name":"consequatur","email":"consequatur","password":"consequatur"}'
 
 ```
+
 ```javascript
 const url = new URL("http://localhost/api/users");
 
@@ -137,6 +140,7 @@ fetch(url, {
     .then(response => response.json())
     .then(json => console.log(json));
 ```
+
 
 > Example response (200):
 
@@ -174,6 +178,7 @@ Parameter | Type | Status | Description
 curl -X GET -G "http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375" \
     -H "Authorization: Bearer {token}"
 ```
+
 ```javascript
 const url = new URL("http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375");
 
@@ -195,6 +200,7 @@ fetch(url, {
     .then(response => response.json())
     .then(json => console.log(json));
 ```
+
 
 > Example response (200):
 
@@ -232,6 +238,7 @@ curl -X PATCH "http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375" 
     -d '{"name":"consequatur","email":"consequatur"}'
 
 ```
+
 ```javascript
 const url = new URL("http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375");
 
@@ -259,6 +266,7 @@ fetch(url, {
     .then(response => response.json())
     .then(json => console.log(json));
 ```
+
 
 > Example response (200):
 
@@ -300,6 +308,7 @@ Parameter | Status | Description
 curl -X DELETE "http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375" \
     -H "Authorization: Bearer {token}"
 ```
+
 ```javascript
 const url = new URL("http://localhost/api/users/1b98187c-f3eb-43dc-bde2-6cc56b583375");
 
@@ -321,6 +330,7 @@ fetch(url, {
     .then(response => response.json())
     .then(json => console.log(json));
 ```
+
 
 > Example response (200):
 
