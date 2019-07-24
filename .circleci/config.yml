@@ -130,6 +130,19 @@ jobs:
       - run: cp -r /tmp/workspace/vendor vendor
       - run: cp .env.ci .env
       - run: make test-larastan
+  tag:production:
+    docker:
+      - image: docker:dind
+    working_directory: ~/app
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: apk update
+      - run: apk add bash py-pip
+      - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
+      - checkout
+      - run: chmod +x ./docker/production.sh
+      - run: ./docker/production.sh
 
 workflows:
   version: 2
@@ -158,3 +171,10 @@ workflows:
       - test:larastan:
           requires:
             - prepare:php
+      - tag:production:
+          requires:
+            - test:phpunit
+            - test:prettier
+            - test:php-cs-fixer
+            - test:wotan
+            - test:larastan
