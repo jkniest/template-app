@@ -12,8 +12,8 @@ jobs:
       - run: apk add bash py-pip
       - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
       - checkout
-      - run: chmod +x ./docker/build.sh ${CIRCLE_WORKFLOW_ID}
-      - run: ./docker/build.sh
+      - run: chmod +x ./docker/build.sh
+      - run: ./docker/build.sh ${CIRCLE_WORKFLOW_ID}
   prepare:php:
     docker:
       - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
