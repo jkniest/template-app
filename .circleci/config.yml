@@ -1,6 +1,11 @@
 version: 2
 
 jobs:
+  prepare:image-tag:
+    docker:
+      - image: bash
+    steps:
+      - echo "export IMAGE_TAG=\""$(echo "${CIRCLE_BRANCH}" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)"\"" >> $BASH_ENV
   build:
     docker:
       - image: docker:dind
@@ -148,7 +153,10 @@ workflows:
   version: 2
   workflow:
     jobs:
+      - prepare:image-tag
       - build
+          requires:
+            - prepare:image-tag
       - prepare:php:
           requires:
             - build

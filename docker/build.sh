@@ -2,12 +2,12 @@
 
 PROJECT_DIR=$(dirname "${BASH_SOURCE[0]}")/..
 BASE_IMAGE_PATH=registry.gitlab.com/jkniest/template-registry
+BRANCH=${1:-latest}
 
 function build() {
 	SERVICE_NAME=${1}
 	DOCKERFILE_PATH=${2}
-	BRANCH=develop
-	CACHE_TAG=develop
+	CACHE_TAG=${BRANCH}
 
 	docker pull ${BASE_IMAGE_PATH}/${SERVICE_NAME}:${BRANCH}
 
