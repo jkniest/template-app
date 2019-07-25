@@ -156,6 +156,18 @@ jobs:
       - checkout
       - run: chmod +x ./docker/tag.sh
       - run: ./docker/tag.sh ${CIRCLE_WORKFLOW_ID} staging
+  cleanup:tags:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run: chmod +x ./docker/clear.sh
+      - run: chmod +x ./docker/encode.sh
+      - run: ./docker/clear.sh "jkniest/template-registry" ${GITLAB_API_TOKEN}
 
 workflows:
   version: 2
@@ -204,3 +216,7 @@ workflows:
           filters:
             branches:
               only: develop
+      - cleanup:tags:
+          requires:
+            - tag:staging
+            - tag:production
