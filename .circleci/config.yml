@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: bash
     steps:
-      - echo "export IMAGE_TAG=\""$(echo "${CIRCLE_BRANCH}" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)"\"" >> $BASH_ENV
+      - run: echo "export IMAGE_TAG=\""$(echo "${CIRCLE_BRANCH}" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)"\"" >> $BASH_ENV
   build:
     docker:
       - image: docker:dind
