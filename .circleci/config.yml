@@ -1,13 +1,6 @@
 version: 2
 
 jobs:
-  prepare:image-tag:
-    docker:
-      - image: ubuntu
-    steps:
-      - run: echo "export IMAGE_TAG=\""$(echo "${CIRCLE_BRANCH}" | iconv -t ascii//TRANSLIT | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)"\"" >> $BASH_ENV
-      - run: echo "Branch -> ${CIRCLE_BRANCH}"
-      - run: cat $BASH_ENV
   build:
     docker:
       - image: docker:dind
@@ -19,12 +12,11 @@ jobs:
       - run: apk add bash py-pip
       - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
       - checkout
-      - run: echo "Using image tag -> ${IMAGE_TAG}"
-      - run: chmod +x ./docker/build.sh ${IMAGE_TAG}
+      - run: chmod +x ./docker/build.sh ${CIRCLE_WORKFLOW_ID}
       - run: ./docker/build.sh
   prepare:php:
     docker:
-      - image: registry.gitlab.com/jkniest/template-registry/build:${IMAGE_TAG}
+      - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
         auth:
           username: gitlab-ci-token
           password: ${GITLAB_TOKEN}
@@ -70,7 +62,7 @@ jobs:
             - node_modules
   test:phpunit:
     docker:
-      - image: registry.gitlab.com/jkniest/template-registry/build:${IMAGE_TAG}
+      - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
         auth:
           username: gitlab-ci-token
           password: ${GITLAB_TOKEN}
@@ -102,7 +94,7 @@ jobs:
       - run: ./node_modules/.bin/prettier --check "resources/**/*.scss"
   test:php-cs-fixer:
     docker:
-      - image: registry.gitlab.com/jkniest/template-registry/build:${IMAGE_TAG}
+      - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
         auth:
           username: gitlab-ci-token
           password: ${GITLAB_TOKEN}
@@ -126,7 +118,7 @@ jobs:
       - run: ./node_modules/.bin/wotan
   test:larastan:
     docker:
-      - image: registry.gitlab.com/jkniest/template-registry/build:${IMAGE_TAG}
+      - image: registry.gitlab.com/jkniest/template-registry/build:${CIRCLE_WORKFLOW_ID}
         auth:
           username: gitlab-ci-token
           password: ${GITLAB_TOKEN}
@@ -156,10 +148,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - prepare:image-tag
-      - build:
-          requires:
-            - prepare:image-tag
+      - build
       - prepare:php:
           requires:
             - build
