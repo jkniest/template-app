@@ -154,7 +154,7 @@ workflows:
   workflow:
     jobs:
       - prepare:image-tag
-      - build
+      - build:
           requires:
             - prepare:image-tag
       - prepare:php:
