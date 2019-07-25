@@ -19,6 +19,7 @@ jobs:
       - run: apk add bash py-pip
       - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
       - checkout
+      - run: echo "Using image tag -> ${IMAGE_TAG}"
       - run: chmod +x ./docker/build.sh ${IMAGE_TAG}
       - run: ./docker/build.sh
   prepare:php:
