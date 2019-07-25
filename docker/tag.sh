@@ -3,13 +3,16 @@
 PROJECT_DIR=$(dirname "${BASH_SOURCE[0]}")/..
 BASE_IMAGE_PATH=registry.gitlab.com/jkniest/template-registry
 
+ORIGINAL_TAG=${1}
+NEW_TAG=${2}
+
 function tag() {
 	SERVICE_NAME=${1}
 	DOCKERFILE_PATH=${2}
 
-	docker pull ${BASE_IMAGE_PATH}/${SERVICE_NAME}:develop
-	docker tag ${BASE_IMAGE_PATH}/${SERVICE_NAME}:develop ${BASE_IMAGE_PATH}/${SERVICE_NAME}:master
-	docker push ${BASE_IMAGE_PATH}/${SERVICE_NAME}:master
+	docker pull ${BASE_IMAGE_PATH}/${SERVICE_NAME}:${ORIGINAL_TAG}
+	docker tag ${BASE_IMAGE_PATH}/${SERVICE_NAME}:${ORIGINAL_TAG} ${BASE_IMAGE_PATH}/${SERVICE_NAME}:${NEW_TAG}
+	docker push ${BASE_IMAGE_PATH}/${SERVICE_NAME}:${NEW_TAG}
 }
 
 tag redis ${PROJECT_DIR}/docker/redis/Dockerfile

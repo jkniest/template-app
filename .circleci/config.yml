@@ -141,8 +141,21 @@ jobs:
       - run: apk add bash py-pip
       - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
       - checkout
-      - run: chmod +x ./docker/production.sh
-      - run: ./docker/production.sh
+      - run: chmod +x ./docker/tag.sh
+      - run: ./docker/tag.sh ${CIRCLE_WORKFLOW_ID} production
+  tag:staging:
+    docker:
+      - image: docker:dind
+    working_directory: ~/app
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: apk update
+      - run: apk add bash py-pip
+      - run: docker login -u gitlab-ci-token -p ${GITLAB_TOKEN} registry.gitlab.com
+      - checkout
+      - run: chmod +x ./docker/tag.sh
+      - run: ./docker/tag.sh ${CIRCLE_WORKFLOW_ID} staging
 
 workflows:
   version: 2
@@ -178,3 +191,16 @@ workflows:
             - test:php-cs-fixer
             - test:wotan
             - test:larastan
+          filters:
+            branches:
+              only: master
+      - tag:staging:
+          requires:
+            - test:phpunit
+            - test:prettier
+            - test:php-cs-fixer
+            - test:wotan
+            - test:larastan
+          filters:
+            branches:
+              only: develop
