@@ -170,7 +170,7 @@ jobs:
       - run: ./docker/clear.sh "jkniest/template-registry" ${GITLAB_API_TOKEN}
   deploy:staging:
     docker:
-      - image: registry.gitlab.com/jkniest/template-reinigung-registry/build:staging
+      - image: registry.gitlab.com/jkniest/template-registry/build:staging
         auth:
           username: gitlab-ci-token
           password: ${GITLAB_TOKEN}
