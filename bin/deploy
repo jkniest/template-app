@@ -7,7 +7,7 @@ REGISTRY_PASSWORD=${4}
 
 SSH_ARGS="-i ~/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
-function cmd() {
+function cmd {
     ssh ${SSH_ARGS} ${SSH_USER}@${SSH_HOST} "cd ${SSH_DIRECTORY} && ${1}"
 }
 
