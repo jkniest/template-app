@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 SSH_HOST=${1}
 SSH_USER=${2}
