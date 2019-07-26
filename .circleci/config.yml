@@ -168,6 +168,20 @@ jobs:
       - run: chmod +x ./docker/clear.sh
       - run: chmod +x ./docker/encode.sh
       - run: ./docker/clear.sh "jkniest/template-registry" ${GITLAB_API_TOKEN}
+  deploy:staging:
+    docker:
+      - image: registry.gitlab.com/jkniest/template-reinigung-registry/build:staging
+        auth:
+          username: gitlab-ci-token
+          password: ${GITLAB_TOKEN}
+    working_directory: ~/app
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "${SSH_KEY_FINGERPRINT}"
+      - run: apt install -y curl
+      - checkout
+      - run: bin/deploy "${SSH_STAGING_HOST}" "${SSH_STAGING_USER}" "${SSH_STAGING_DIRECTORY}" "${GITLAB_TOKEN}"
 
 workflows:
   version: 2
@@ -215,8 +229,14 @@ workflows:
             - test:larastan
           filters:
             branches:
-              only: develop
+              only: master # change this to develop on a real application
       - cleanup:tags:
           requires:
             - tag:staging
             - tag:production
+      - deploy:staging:
+          requires:
+            - tag:staging
+          filters:
+            branches:
+              only: master # change this to develop on a real application

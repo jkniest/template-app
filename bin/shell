@@ -1,3 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-docker-compose run --rm build bash
+CMD="docker-compose run --rm build"
+
+if [ $# -eq 0 ] ; then
+    CMD="$CMD bash"
+    $CMD
+    exit;
+fi
+
+$CMD ${@}

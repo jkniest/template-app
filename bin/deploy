@@ -1,0 +1,27 @@
+#!/bin/sh
+
+SSH_HOST=${1}
+SSH_USER=${2}
+SSH_DIRECTORY=${3}
+REGISTRY_PASSWORD=${4}
+
+SSH_ARGS="-i ~/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+function cmd() {
+    ssh ${SSH_ARGS} ${SSH_USER}@${SSH_HOST} "cd ${SSH_DIRECTORY} && ${1}"
+}
+
+cmd "docker-compose down"
+cmd "git pull"
+cmd "docker login registry.gitlab.com -u gitlab-ci-token -p ${REGISTRY_PASSWORD} && docker-compose pull"
+cmd "docker-compose up -d"
+cmd "./bin/shell composer install --optimize-autoloader --no-dev"
+cmd "./bin/shell php artisan migrate --force"
+cmd "./bin/shell php artisan cache:clear"
+cmd "./bin/shell php artisan route:cache"
+cmd "./bin/shell php artisan config:cache"
+cmd "./bin/shell chmod -R o+w storage/*"
+cmd "./bin/shell chmod -R o+r storage/*"
+cmd "./bin/shell php artisan storage:link"
+cmd "./bin/shell yarn install"
+cmd "./bin/shell yarn run production"
