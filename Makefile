@@ -26,11 +26,15 @@ help:
 #############
 
 ## Build application (composer / yarn)
-build: build-composer build-yarn build-database
+build: build-composer build-key build-yarn build-database
 
 ## Composer Install
 build-composer:
 	composer install
+
+# Application encryption key
+build-key:
+	php artisan key:generate
 
 ## Yarn Install & Compile
 build-yarn:
